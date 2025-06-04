@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Untuk Kaka Noki ❤️</title>
+
+  <!-- Font romantis: Dancing Script -->
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap" rel="stylesheet" />
+
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      overflow: hidden;
+      background: pink;
+      font-family: 'Dancing Script', cursive;
+      font-weight: 700;
+      position: relative;
+    }
+
+    .centered {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+      z-index: 10;
+      width: 90%;
+      color: black;
+      padding: 0 10px;
+      box-sizing: border-box;
+    }
+
+    .typewriter-line {
+      font-size: 2.5em;
+      color: black;
+      display: block;
+      width: 100%;
+      white-space: normal;
+      overflow-wrap: break-word;
+      animation: typing 0.5s steps(40, end) 1 forwards;
+      opacity: 0;
+    }
+
+    @keyframes typing {
+      0% { opacity: 0; }
+      100% { opacity: 1; }
+    }
+
+    .balloon {
+      position: fixed;
+      bottom: -80px;
+      width: 80px;
+      height: 100px;
+      background-image: url('https://raw.githubusercontent.com/Bang1239/Bang1239.github.io/935cacc3d21c380ffbaf5bc7543ead773a74e2a3/ChatGPT_Image_Jun_5__2025__12_16_54_AM-removebg-preview.png');
+      background-size: contain;
+      background-repeat: no-repeat;
+      pointer-events: none;
+      animation-timing-function: linear;
+      z-index: 5;
+    }
+
+    @keyframes floatUp {
+      0% {
+        transform: translateY(0) scale(1);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(-110vh) scale(1.1);
+        opacity: 0;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .typewriter-line {
+        font-size: 1.8em;
+      }
+
+      .balloon {
+        width: 60px;
+        height: 80px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="centered">
+    <div id="message"></div>
+  </div>
+
+  <script>
+    const messageGroups = [
+      [
+        "Selamat Pagi, Kaka Noki",
+        "Pagi datang membawa cahaya,",
+        "tapi tak sehangat hadirmu di jiwa."
+      ],
+      [
+        "Langit biru belum sempurna,",
+        "tanpa senyummu yang aku cinta.",
+        "Kaka Noki, semoga pagi ini indah,"
+      ],
+      [
+        "seindah hatimu yang selalu ramah.",
+        "Setiap detik yang aku lewati,",
+        "selalu ada kamu di dalam hati."
+      ],
+      [
+        "Kopi mungkin bisa menghangatkan,",
+        "tapi sapamu lebih menenangkan.",
+        "Jangan lupa sarapan yang bergizi,"
+      ],
+      [
+        "biar harimu berjalan penuh energi.",
+        "Hari ini, aku titip rindu yang sederhana,",
+        "dibungkus doa tanpa banyak kata."
+      ],
+      [
+        "Selamat pagi, Kaka Noki tercinta,",
+        "semoga bahagia selalu menyertaimu",
+        "sepanjang langkahnya."
+      ]
+    ];
+
+    const messageDiv = document.getElementById("message");
+    let groupIndex = 0;
+
+    function typeLines(lines, i = 0) {
+      if (i >= lines.length) {
+        setTimeout(() => {
+          groupIndex = (groupIndex + 1) % messageGroups.length;
+          messageDiv.innerHTML = '';
+          typeLines(messageGroups[groupIndex]);
+        }, 4000);
+        return;
+      }
+
+      const line = document.createElement('div');
+      line.classList.add('typewriter-line');
+      messageDiv.appendChild(line);
+
+      let charIndex = 0;
+
+      function typeChar() {
+        if (charIndex <= lines[i].length) {
+          line.textContent = lines[i].substring(0, charIndex);
+          charIndex++;
+          setTimeout(typeChar, 40);
+        } else {
+          line.style.opacity = 1;
+          setTimeout(() => typeLines(lines, i + 1), 600);
+        }
+      }
+
+      typeChar();
+    }
+
+    typeLines(messageGroups[groupIndex]);
+
+    // Balon terbang
+    function createBalloon() {
+      const balloon = document.createElement('div');
+      balloon.classList.add('balloon');
+      balloon.style.left = Math.random() * 90 + 'vw';
+      const duration = 5000 + Math.random() * 5000;
+      balloon.style.animation = `floatUp ${duration}ms linear forwards`;
+      document.body.appendChild(balloon);
+      setTimeout(() => {
+        balloon.remove();
+      }, duration);
+    }
+
+    setInterval(createBalloon, 400);
+  </script>
+
+</body>
+</html>
